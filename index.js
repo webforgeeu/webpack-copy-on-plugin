@@ -41,8 +41,8 @@ WebpackCopyOnPlugin.prototype.apply = function(compiler) {
     };
 
     compiler.plugin(eventHook, function(stats) {
-        const statsJson = stats.toJson();
-        const chunks = statsJson.chunks;
+        const statsJson = stats.toJson ? stats.toJson() : {};
+        const chunks = statsJson.chunks ? statsJson.chunks : [];
         chunks.forEach(function(chunk) {
             const chunkName = chunk.names[0];
             let mapping = mappings[chunkName];
